@@ -1,5 +1,4 @@
 # pico-timer
-
-![schematic](https://github.com/bcbergmanuu/pico-timer/blob/master/timer.png?raw=true)
+![schematic](https://github.com/bcbergmanuu/pico-timer/blob/master/drawings/timer.png?raw=true)
 
 
