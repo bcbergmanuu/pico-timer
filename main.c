@@ -80,13 +80,24 @@ void drawnumber(ShiftRegister reg, uint number) {
 void triggered_button() {      
   while(true) {    
     sleep_ms(1000);
-    if(reset_state == 1 && (!gpio_get(button_locations[0]) && !gpio_get(button_locations[1]))) {
-      //triggered state:
-      sleep_ms(1000);
+    //triggered state:
+    printf("triggered state %i\n", reset_state);
+    if(reset_state == 1 && (gpio_get(button_locations[0]) && gpio_get(button_locations[1]))) {      
+      
+      sleep_ms(3000);
       reset_state = 2;
-    }    
-    if(reset_state == 2 && (gpio_get(button_locations[0]) || gpio_get(button_locations[1]))) {
-      //pressed state, if released by one party, exit.
+      
+    }
+    //released state:
+    if(reset_state == 2 && (!gpio_get(button_locations[0]) && !gpio_get(button_locations[1]))) {      
+      printf("released state %i\n", reset_state);
+      sleep_ms(1000);
+      reset_state = 3;
+    } 
+    //dubble pressed state   
+    if(reset_state == 3 && (gpio_get(button_locations[0]) || gpio_get(button_locations[1]))) {
+      //if released by one party, exit.
+      printf("dubble pressed state %i\n", reset_state);
       gpio_put(light_locations[0], true);
       gpio_put(light_locations[1], true);
       sleep_ms(100);
